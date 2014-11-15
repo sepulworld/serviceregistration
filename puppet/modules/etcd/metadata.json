@@ -1,0 +1,44 @@
+{
+  "name": "KyleAnderson-etcd",
+  "version": "0.4.1",
+  "source": "https://github.com/solarkennedy/puppet-etcd",
+  "author": "KyleAnderson",
+  "license": "Apache License, Version 2.0",
+  "summary": "A Puppet module to install and configure etcd!",
+  "description": "A Puppet module to install and configure etcd!",
+  "project_page": "https://github.com/solarkennedy/puppet-etcd",
+  "dependencies": [
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 0.1.6"
+    }
+  ],
+  "types": [
+
+  ],
+  "checksums": {
+    "Gemfile": "0c1b4acd640009fe804addb53ddcce1b",
+    "Gemfile.lock": "bd6534aa769cfcc2b0432c0d3d4a5cda",
+    "LICENSE": "d2794c0df5b907fdace235a619d80314",
+    "Modulefile": "73e2d1d089b474e9f5134871e70ace67",
+    "Puppetfile": "1ab8f122d55f6bbc8586741f2dd3c95c",
+    "README.md": "98f0d26f66deaa47f334730a4b17b0d4",
+    "Rakefile": "7593e9a73e0c8376762da7efaa10489c",
+    "manifests/config.pp": "d03a8e3beaaa60252cfcdc3c1e28368c",
+    "manifests/init.pp": "f57824803b395f93a95efe7e9dee18d9",
+    "manifests/install.pp": "7c1c76c99f41d65982e2bcd994d4e30f",
+    "manifests/params.pp": "4f70b6da11f162529df6c063a53b69d8",
+    "manifests/service.pp": "cb8769600f1538f3f818f49260d1efb7",
+    "spec/classes/coverage_spec.rb": "856232f2c4f22b0d0830a99aedc0c429",
+    "spec/classes/etcd_spec.rb": "8d8d00121013d945aa3c6f95d1bec255",
+    "spec/fixtures/classes/etcd/etcd.conf": "1f504906b23342965a069f14f03f2427",
+    "spec/fixtures/classes/etcd/etcd.sysconfig": "a0b69c9de48b0590ab307fd4fb2ae8fc",
+    "spec/fixtures/classes/etcd/etcd.upstart": "5c5705e97d7ca699b6a63c60e96525bd",
+    "spec/spec_helper.rb": "0db89c9a486df193c0e40095422e19dc",
+    "templates/etcd.conf.erb": "3dbb2dba4dda89bd1b697b8ce402d3df",
+    "templates/etcd.initd.erb": "d4da77a4162816e47e10f53e4cf4b997",
+    "templates/etcd.sysconfig.erb": "bbd77bfc6bfda1f38f4041edd14b8f3f",
+    "templates/etcd.upstart.erb": "223f64517541bf08925855924df33f2d",
+    "tests/init.pp": "b54886bd58c8c7b2a11f2712dc8cf3cf"
+  }
+}
