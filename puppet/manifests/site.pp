@@ -1,5 +1,13 @@
 node default {
 
+  include supervisord
+
+  file { '/etc/synapse.json.conf':
+    ensure => present,
+    before => Supervisord::Program['synapse'],
+    source => "puppet:///modules/synapse/synapse.json.conf",
+  }
+
   package { 'synapse':
     ensure   => installed,
     provider => gem,
@@ -18,6 +26,10 @@ node default {
   }
   
   package { 'haproxy':
+    ensure => installed,
+  }
+
+  package { 'pip':
     ensure => installed,
   }
 
@@ -56,4 +68,10 @@ node default {
     verbose                 => false,
     very_verbose            => false,
   }
+  
+  supervisord::program { 'synaspe':
+      command    => 'synapse -c /etc/synapse.json.conf',
+      priority => '100',
+  }
+
 }
