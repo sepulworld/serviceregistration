@@ -1,6 +1,17 @@
 node default {
 
   include supervisord
+  include golang
+ 
+  exec { 'go get github.com/adetante/hadiscover':
+    command => "/bin/go get github.com/adetante/hadiscover"
+  }
+
+  file { '/etc/haproxy/haproxy.cfg.tpl':
+    ensure => present,
+    source => "puppet:///modules/hadiscover/haproxy.cfg.tpl",
+    before => Exec['go get github.com/adetante/hadiscover'],
+  }
 
   file { '/etc/synapse.json.conf':
     ensure => present,
@@ -26,7 +37,8 @@ node default {
   }
   
   package { 'haproxy':
-    ensure => installed,
+    ensure     => installed,
+    before => Supervisord::Program['synapse'],
   }
 
   package { 'pip':
@@ -37,6 +49,11 @@ node default {
     ensure  => installed,
     before  => Class['::etcd'],
     require => [Apt::Key["Georiot"],Apt::Source["georiot"]],
+  }
+  
+  service { 'haproxy':
+    ensure  => running,
+    require => Package['haproxy'],
   }
   
   apt::key { "Georiot":
@@ -68,10 +85,16 @@ node default {
     verbose                 => false,
     very_verbose            => false,
   }
-  
-  supervisord::program { 'synaspe':
-      command    => 'synapse -c /etc/synapse.json.conf',
-      priority => '100',
+ 
+  # Test once etcd patch is merged into synapse
+  #supervisord::program { 'synaspe':
+  #  command    => 'synapse -c /etc/synapse.json.conf',
+  #  priority => '100',
+  #}
+
+  supervisord::program { 'hadiscover':
+    command  => 'hadiscover --config /etc/haproxy.cfg.tpl --etcd http://localhost:4001 --ha /usr/sbin/haproxy --key services',
+    priority => '100',
   }
 
 }
