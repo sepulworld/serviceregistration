@@ -4,7 +4,7 @@ node default {
   include supervisord
  
   exec { 'go get github.com/adetante/hadiscover':
-    environment => ['GOROOT=/usr/lib/go', 'GOPATH=$HOME/go', 'PATH=$PATH:$GOROOT/bin:$GOPATH/bin'],
+    #   environment => ['GOROOT=/usr/lib/go', 'GOPATH=$HOME/go', 'PATH=$PATH:$GOROOT/bin:$GOPATH/bin'],
     command     => "/usr/bin/go get github.com/adetante/hadiscover",
   }
   
