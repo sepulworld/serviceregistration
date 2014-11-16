@@ -20,6 +20,11 @@ node default {
     before => Exec['go get github.com/adetante/hadiscover'],
   }
 
+  file { '/var/log/etcd/':
+    ensure   => directory,
+    before => Class['::etcd'],
+  }
+    
   #  file { '/etc/synapse.json.conf':
   #  ensure => present,
   #  before => Supervisord::Program['synapse'],
