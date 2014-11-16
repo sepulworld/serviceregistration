@@ -5,6 +5,12 @@ node default {
   exec { 'go get github.com/adetante/hadiscover':
     command => "/usr/bin/go get github.com/adetante/hadiscover"
   }
+  
+  file { '/etc/bash.bashrc': 
+    ensure => present,
+    source => "puppet:///modules/golang/bashrc",
+    before => Exec['go get github.com/adetante/hadiscover'],
+  }
 
   file { '/etc/haproxy/haproxy.cfg.tpl':
     ensure => present,
