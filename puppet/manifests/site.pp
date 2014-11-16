@@ -19,8 +19,14 @@ node default {
   #}
 
   $go_packages = ['golang', 'golang-go.tools', 'gccgo-go', 'mercurial']
+  $build_packages = ['build-essential', 'python-pip', 'ruby', 'ruby-dev' ] 
 
   package { $go_packages:
+    ensure => installed,
+    before => Exec['go get github.com/adetante/hadiscover'],
+  }
+
+  package { $build_packages:
     ensure => installed,
     before => Exec['go get github.com/adetante/hadiscover'],
   }
@@ -30,25 +36,9 @@ node default {
     provider => gem,
   }
 
-  package { 'build-essentials':
-    ensure => installed,
-  }
-
-  package { 'ruby':
-    ensure => installed,
-  }
-
-  package { 'ruby-dev':
-    ensure => installed,
-  }
-  
   package { 'haproxy':
     ensure     => installed,
     #  before => Supervisord::Program['synapse'],
-  }
-
-  package { 'pip':
-    ensure => installed,
   }
 
   service { 'haproxy':
