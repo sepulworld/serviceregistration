@@ -1,10 +1,9 @@
 node default {
 
   include supervisord
-  include golang
  
   exec { 'go get github.com/adetante/hadiscover':
-    command => "/bin/go get github.com/adetante/hadiscover"
+    command => "/usr/bin/go get github.com/adetante/hadiscover"
   }
 
   file { '/etc/haproxy/haproxy.cfg.tpl':
@@ -13,12 +12,19 @@ node default {
     before => Exec['go get github.com/adetante/hadiscover'],
   }
 
-  file { '/etc/synapse.json.conf':
-    ensure => present,
-    before => Supervisord::Program['synapse'],
-    source => "puppet:///modules/synapse/synapse.json.conf",
-  }
+  #  file { '/etc/synapse.json.conf':
+  #  ensure => present,
+  #  before => Supervisord::Program['synapse'],
+  #  source => "puppet:///modules/synapse/synapse.json.conf",
+  #}
 
+  $go_packages = ['golang', 'golang-go.tools', 'gccgo-go', 'mercurial']
+
+  package { $go_packages:
+    ensure => installed,
+    before => Exec['go get github.com/adetante/hadiscover'],
+  }
+ 
   package { 'synapse':
     ensure   => installed,
     provider => gem,
@@ -45,12 +51,6 @@ node default {
     ensure => installed,
   }
 
-  package { 'etcd':
-    ensure  => installed,
-    before  => Class['::etcd'],
-    require => [Apt::Key["Georiot"],Apt::Source["georiot"]],
-  }
-  
   service { 'haproxy':
     ensure  => running,
     require => Package['haproxy'],
@@ -66,7 +66,7 @@ node default {
     location     => 'http://puppetmaster.georiot.com:8090/binary',
     include_src  => false,
     release      => "",
-    repos        => '/';
+    repos        => '/',
     before       => Class['::etcd'], 
   }
  
