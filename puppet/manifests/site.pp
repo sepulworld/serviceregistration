@@ -77,7 +77,8 @@ node default {
     #discovery               => true,
     # generate a new token for each unique cluster from https://discovery.etcd.io/new
     # if you are following my cluster guide, then use the token you created for you cluster here
-    #discovery_token         => "",
+    #discovery_token        => "",
+    name                    => $hostname,
     peer_election_timeout   => 500,
     peer_heartbeat_interval => 100,
     addr                    => "${::ipaddress_eth0_0}:4001",
