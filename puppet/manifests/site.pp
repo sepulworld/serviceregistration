@@ -1,5 +1,6 @@
 node default {
 
+  include apt
   include supervisord
  
   exec { 'go get github.com/adetante/hadiscover':
