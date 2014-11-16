@@ -44,7 +44,7 @@ node default {
   
   package { 'haproxy':
     ensure     => installed,
-    before => Supervisord::Program['synapse'],
+    #  before => Supervisord::Program['synapse'],
   }
 
   package { 'pip':
