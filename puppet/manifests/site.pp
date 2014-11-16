@@ -5,7 +5,8 @@ node default {
  
   exec { 'go get github.com/adetante/hadiscover':
     #   environment => ['GOROOT=/usr/lib/go', 'GOPATH=$HOME/go', 'PATH=$PATH:$GOROOT/bin:$GOPATH/bin'],
-    command     => "/usr/bin/go get github.com/adetante/hadiscover",
+    command         => "/usr/bin/go get github.com/adetante/hadiscover",
+    creates         => "/root/go/src/github.com/adetante",
   }
   
   file { '/etc/bash.bashrc': 
