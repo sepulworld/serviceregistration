@@ -51,7 +51,8 @@ node default {
   }
 
   package { 'haproxy':
-    ensure     => installed,
+    ensure    => installed,
+    require   => Apt::Ppa['ppa:vbernat/haproxy-1.5'],
     #  before => Supervisord::Program['synapse'],
   }
 
@@ -73,6 +74,9 @@ node default {
     repos        => '/',
     before       => Class['::etcd'], 
   }
+
+  apt::ppa { 'ppa:vbernat/haproxy-1.5': }
+
  
   class { '::etcd':
     #discovery               => true,
