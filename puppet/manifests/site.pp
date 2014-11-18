@@ -98,7 +98,7 @@ node default {
   #}
 
   supervisord::program { 'hadiscover':
-    command  => 'hadiscover --config /etc/haproxy.cfg.tpl --etcd http://localhost:4001 --ha /usr/sbin/haproxy --key services',
+    command  => '/root/go/bin/hadiscover --config /etc/haproxy.cfg.tpl --etcd http://localhost:4001 --ha /usr/sbin/haproxy --key service',
     priority => '100',
   }
 
