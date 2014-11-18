@@ -48,6 +48,7 @@ redirect_stderr=<%= @redirect_stderr %>
 <% if @stdout_logfile -%>
 stdout_logfile=<%= scope.lookupvar('supervisord::log_path') %>/<%= @stdout_logfile %>
 <% end -%>
+loglevel=debug
 <% if @stdout_logfile_maxbytes -%>
 stdout_logfile_maxbytes=<%= @stdout_logfile_maxbytes %>
 <% end -%>
