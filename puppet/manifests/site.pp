@@ -2,7 +2,12 @@ node default {
 
   include apt
   include supervisord
+  include java
  
+  class {'zookeeper::cluster':
+                server_id => '1',
+            }
+
   exec { 'go get github.com/adetante/hadiscover':
     #   environment => ['GOROOT=/usr/lib/go', 'GOPATH=$HOME/go', 'PATH=$PATH:$GOROOT/bin:$GOPATH/bin'],
     command         => "/usr/bin/go get github.com/adetante/hadiscover",
